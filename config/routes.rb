@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   match 'signout', to: 'sessions#destroy', as: 'signout', via: [:get, :post]
   root 'pages#home'
   resources :flags, only: %w(new create)
-  get '/choose', to: 'flags#choose'
+  get '/choose', to: 'flags#choose', as: 'choose'
   post '/flag', to: 'flags#chosen'
   get '/preview', to: 'flags#preview', as: 'preview'
   post '/finish', to: 'flags#create'

@@ -2,7 +2,7 @@ class SessionsController < ApplicationController
   def create
     user = User.from_omniauth(auth_parameters)
     session[:user_id] = user.id
-    redirect_to preview_path
+    redirect_to choose_path
   end
 
   def destroy
