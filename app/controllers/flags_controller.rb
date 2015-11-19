@@ -13,16 +13,12 @@ class FlagsController < ApplicationController
   end
 
   def preview
-    koala = Koala::Facebook::API.new(current_user.oauth_token)
-    picture_url = koala.get_picture("me", type: "large")
-    flag_path = valid_flag_name(params[:flag_name])
-    profile_image = Magick::Image.from_blob(Faraday.get(picture_url).body).first
-    overlay_image = Magick::Image.from_blob(File.read(flag_path)).first
-    overlay_image.resize!(profile_image.columns, profile_image.rows)
-    overlay_image.background_color = "none"
-    overlay_image.opacity = Magick::QuantumRange / 2
-    composited = profile_image.composite(overlay_image, 0, 0, Magick::OverCompositeOp)
-    @preview_image = Base64.encode64(composited.to_blob)
+    @preview_image = Base64.encode64(create_image(params[:flag_name]))
+  end
+
+  def download
+    blob = create_image(params[:flag_name])
+    send_data(blob, type: 'image/png')
   end
 
   def create(params)
@@ -36,5 +32,17 @@ class FlagsController < ApplicationController
   def valid_flag_name(flag_name)
     flag_path = Rails.root.join('app/assets/images/flags/' + flag_name.downcase + '.png')
     File.exists?(flag_path) && flag_path.to_s
+  end
+
+  def create_image(flag_name)
+    koala = Koala::Facebook::API.new(current_user.oauth_token)
+    picture_url = koala.get_picture("me", type: "large")
+    flag_path = valid_flag_name(flag_name)
+    profile_image = Magick::Image.from_blob(Faraday.get(picture_url).body).first
+    overlay_image = Magick::Image.from_blob(File.read(flag_path)).first
+    overlay_image.resize!(profile_image.columns, profile_image.rows)
+    overlay_image.background_color = "none"
+    overlay_image.opacity = Magick::QuantumRange / 2
+    profile_image.composite(overlay_image, 0, 0, Magick::OverCompositeOp).to_blob
   end
 end

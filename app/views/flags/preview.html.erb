@@ -1,2 +1,5 @@
 <h2 class="instruction">Here is your new profile pic</h2>
 <img class="flagPreview" src="data:image/png;base64,<%= @preview_image %>"/>
+<br/>
+<a class="button" href="<%= download_path(flag_name: params[:flag_name])%>">Download</a>
+

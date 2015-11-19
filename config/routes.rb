@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   get '/choose', to: 'flags#choose', as: 'choose'
   post '/flag', to: 'flags#chosen'
   get '/preview', to: 'flags#preview', as: 'preview'
+  get '/download', to: 'flags#download', as: 'download'
   post '/finish', to: 'flags#create'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
