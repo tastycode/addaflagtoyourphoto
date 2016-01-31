@@ -27,7 +27,7 @@ class LoginPage extends Component {
 
           <FacebookLogin
             className="button button--cta"
-            appId="452839681582929"
+            appId="447582535441977"
             autoLoad={true}
             callback={this.responseFacebook}/>
       </div>
