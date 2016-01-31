@@ -1,0 +1,18 @@
+@import "../variables.css";
+
+
+.canvasContainer {
+  display: flex;
+  flex-direction: column;
+}
+
+.canvas {
+  zoom: 0.8;
+}
+
+.chooseAgainLink {
+  display: block;
+  margin: 1em;
+  padding-bottom: 0.2em;
+  border-bottom: 1px solid #fff;
+}

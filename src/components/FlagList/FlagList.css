@@ -1,0 +1,39 @@
+@import '../variables.css';
+.flagInput {
+  text-align: center;
+  display: inline-block;
+  border: none;
+  border-bottom: 3px solid white;
+  margin-left: auto;
+  margin-right: auto;
+  margin: 2em auto;
+  font-size: 1.2em;
+  width: 100%;
+  background: none;
+  color: white;
+
+  &:focus {
+    outline: 0;
+  }
+}
+
+.flagList {
+  display: flex;
+  li {
+    list-style-type: none;
+    flex: 1;
+  }
+}
+
+.flag {
+  margin: 0.5em;
+  display: flex;
+  flex-direction: column;
+  &-img {
+    max-height: 4em;
+  }
+
+  &-caption {
+    @mixin magazine;
+  }
+}
